@@ -41,8 +41,7 @@ void dfs2(uint32_t v, uint32_t parent)
         if (e != parent)
             dfs2(e, v);
 
-    if (v != 1)
-        ans = max(ans, longestPath(v, parent) * longestPath(parent, v));
+    ans = max(ans, longestPath(v, parent) * longestPath(parent, v));
 }
 
 int main()
@@ -56,7 +55,7 @@ int main()
         graph[v].push_back(u);
     }
 
-    dfs2(1, 1);
+    dfs2(1, 0);
 
     cout << ans << endl;
 

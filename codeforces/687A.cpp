@@ -72,7 +72,7 @@ int main()
         graph[v].push_back(u);
     }
 
-    memset(color, 0, maxn * sizeof(Color));
+    memset(color, 0, n * sizeof(Color));
 
     for (uint32_t i = 1; i <= n; i++)
         if (color[i] == Color::Uncolored)

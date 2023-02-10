@@ -36,7 +36,7 @@ int main()
         graph[v].push_back(u);
     }
 
-    memset(graphVisitMark, 0, maxn);
+    memset(graphVisitMark, 0, n * sizeof(bool));
 
     vector<pair<uint32_t, uint32_t>> componentMinMax;
     for (uint32_t i = 1; i <= n; i++)
