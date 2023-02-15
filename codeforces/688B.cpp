@@ -12,6 +12,7 @@ int main()
     cout << s;
     for (size_t i = s.size(); i > 0; i--)
         cout << s[i - 1];
+    cout << endl;
 
     return (0 ^ 0);
 }
