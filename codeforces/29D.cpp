@@ -13,7 +13,7 @@ vector<uint32_t> graph[maxn];
 queue<uint32_t> destinations;
 vector<uint32_t> paths[maxn];
 
-#define AT(x, y) (x + y * maxn)
+#define AT(x, y) ((x - 1) + (y - 1) * (maxn))
 uint16_t weight[maxn * maxn];
 
 void check(uint32_t u, uint32_t v)
