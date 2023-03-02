@@ -1,3 +1,5 @@
+// Parsa Jokar 2023 https://github.com/phictus/ioi
+
 #include <iostream>
 #include <string>
 #include <unordered_map>
