@@ -11,7 +11,6 @@ constexpr uint32_t maxlogn = 17;
 vector<uint32_t> children[maxn];
 vector<uint32_t> timesAtHeight[maxn];
 uint32_t height[maxn];
-uint32_t parent[maxn];
 uint32_t ancestor[maxn][maxlogn];
 uint32_t beginTime[maxn];
 uint32_t endTime[maxn];
@@ -24,7 +23,6 @@ void DFS(uint32_t v, uint32_t h = 0)
 
     beginTime[v] = currentTime++;
 
-    ancestor[v][0] = parent[v];
     for (uint32_t i = 1; i < maxlogn; i++)
         ancestor[v][i] = ancestor[ancestor[v][i - 1]][i - 1];
 
@@ -64,12 +62,12 @@ int main()
     vector<uint32_t> roots;
     for (uint32_t i = 1; i <= n; i++)
     {
-        uint32_t p;
-        cin >> p;
-        parent[i] = p;
-        children[p].push_back(i);
+        uint32_t parent;
+        cin >> parent;
+        ancestor[i][0] = parent;
+        children[parent].push_back(i);
 
-        if (p == 0)
+        if (parent == 0)
             roots.push_back(i);
     }
 
