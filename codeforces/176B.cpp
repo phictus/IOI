@@ -2,7 +2,6 @@
 
 #include <iostream>
 #include <string>
-#include <deque>
 #include <vector>
 
 using namespace std;
@@ -11,22 +10,15 @@ constexpr uint64_t mod = 1000000007;
 
 void FindOffsets(const string& str1, const string& str2, vector<uint64_t>& offsets)
 {
-    deque<char> l;
-    for (char c : str1)
-        l.push_back(c);
-
     for (uint64_t offset = 0; offset < str1.size(); offset++)
     {
         bool isEqual = true;
         for (uint64_t i = 0; i < str1.size(); i++)
-            if (l[i] != str2[i])
-                goto NOT_EQUAL;
-        offsets.push_back(offset);
+            if (str1[(i + offset) % str1.size()] != str2[i])
+                isEqual = false;
 
-    NOT_EQUAL:
-        uint64_t x = l.back();
-        l.pop_back();
-        l.push_front(x);
+        if (isEqual)
+            offsets.push_back(offset);
     }
 }
 
