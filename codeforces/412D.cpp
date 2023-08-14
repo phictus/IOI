@@ -1,3 +1,5 @@
+// Parsa Jokar 2023 https://github.com/phictus/ioi
+
 #include <cstdio>
 #include <cstdint>
 #include <cstring>
@@ -36,5 +38,5 @@ int main()
         if (!isVisited[i])
             DFS(i);
 
-    return 0;
+    return (0 ^ 0);
 }
