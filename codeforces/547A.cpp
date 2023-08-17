@@ -42,10 +42,14 @@ int32_t main(){
             printf("%lld\n", p1);
             return 0;
         }
-        if (p1 < p2)
+        else if (p1 < p2)
         {
             if (c1 == -1)
+            {
                 puts("-1");
+                return 0;
+            }
+
             p1 += c1;
         }
         else
