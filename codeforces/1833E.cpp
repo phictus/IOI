@@ -29,11 +29,11 @@ int main()
         uint32_t n;
         scanf("%u", &n);
 
+        map<Pair, bool> isAdjacent;
+        uint32_t components = n, cycles = 0;
         for (uint32_t i = 1; i <= n; i++)
             parent[i] = i;
-        map<Pair, bool> isAdjacent;
 
-        uint32_t components = n, cycles = 0;
         for (uint32_t i = 1; i <= n; i++)
         {
             uint32_t a;
@@ -41,7 +41,7 @@ int main()
 
             if (FindSet(a) == FindSet(i))
             {
-                if (!isAdjacent[make_pair(a, i)])
+                if (isAdjacent.count(make_pair(a, i)) == 0)
                     cycles++;
             }
             else
