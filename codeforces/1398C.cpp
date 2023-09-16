@@ -1,3 +1,5 @@
+// Parsa Jokar 2023 https://github.com/phictus/ioi
+
 #include <iostream>
 #include <map>
 
@@ -36,4 +38,6 @@ int main()
 
         cout << result << '\n';
     }
+
+    return (0 ^ 0);
 }
