@@ -1,3 +1,5 @@
+// Parsa Jokar 2023 https://github.com/phictus/ioi
+
 #include <iostream>
 #include <limits>
 #include <cstdint>
@@ -63,5 +65,5 @@ int main()
         ans = max(ans, dp[n - 1][i]);
     cout << ans << '\n';
 
-    return 0;
+    return (0 ^ 0);
 }
