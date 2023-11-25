@@ -1,3 +1,3 @@
 @echo off
-g++ -std=c++17 %* -o run.exe
+clang++ -std=c++17 -OFast %* -o run.exe
 .\run.exe
