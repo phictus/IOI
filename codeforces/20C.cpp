@@ -1,76 +1,74 @@
 // Parsa Jokar 2023 https://github.com/phictus/ioi
 
+#pragma GCC optimize("Ofast")
+
 #include <iostream>
 #include <vector>
 #include <queue>
 #include <limits>
 #include <cstdint>
-#include <cstring>
 
 using namespace std;
-using Pair = pair<uint64_t, uint32_t>;
+using Pair = pair<int64_t, int64_t>;
+using PriorityQueue = priority_queue<Pair, vector<Pair>, greater<Pair>>;
+
+constexpr int64_t maxn = 100001, inf = numeric_limits<int64_t>::max();
+int64_t n, m;
+vector<Pair> adj[maxn];
 
 int main()
 {
-    uint32_t n, m;
-    cin >> n >> m;
+    ios_base::sync_with_stdio(false);
 
-    vector<Pair> adjacents[n + 1];
-    for (uint32_t i = 0; i < m; i++)
+    cin >> n >> m;
+    for (int64_t i = 0; i < m; i++)
     {
-        uint32_t v, u;
-        uint64_t w;
+        int64_t v, u, w;
         cin >> v >> u >> w;
-        adjacents[v].push_back(make_pair(w, u));
-        adjacents[u].push_back(make_pair(w, v));
+        adj[v].push_back(make_pair(w, u));
+        adj[u].push_back(make_pair(w, v));
     }
 
-    priority_queue<Pair, vector<Pair>, greater<Pair>> q;
-    auto d = vector<uint64_t>(n + 1, numeric_limits<uint64_t>::max());
-    uint32_t parent[n + 1];
-    bool isVisited[n + 1];
-    memset(isVisited, 0, (n + 1) * sizeof(bool));
+    PriorityQueue q;
+    auto d = vector<int64_t>(maxn, inf);
+    auto p = vector<int64_t>(maxn, -1);
 
     q.push(make_pair(0, 1));
     d[1] = 0;
-    parent[1] = 0;
 
     while (!q.empty())
     {
-        uint32_t vertex = q.top().second;
+        auto[dist, v] = q.top();
         q.pop();
 
-        if (isVisited[vertex])
+        if (dist != d[v])
             continue;
 
-        for (const Pair& adj : adjacents[vertex])
+        for (auto[w, u] : adj[v])
         {
-            if (d[adj.second] > d[vertex] + adj.first)
+            if (d[u] > dist + w)
             {
-                d[adj.second] = d[vertex] + adj.first;
-                parent[adj.second] = vertex;
-                q.push(make_pair(d[adj.second], adj.second));
+                d[u] = dist + w;
+                p[u] = v;
+                q.push(make_pair(d[u], u));
             }
         }
     }
 
-    if (d[n] == numeric_limits<uint64_t>::max())
-        cout << -1 << endl;
-    else
+    if (p[n] == -1)
     {
-        vector<uint32_t> path;
-        uint32_t head = n;
-        while (parent[head] != 0)
-        {
-            path.push_back(head);
-            head = parent[head];
-        }
-        path.push_back(head);
-
-        for (auto it = path.rbegin(); it != path.rend(); it++)
-            cout << *it << ' ';
-        cout << endl;
+        cout << "-1" << '\n';
+        return (0 ^ 0);
     }
+
+    vector<int64_t> path;
+    path.push_back(n);
+    while (path.back() != 1)
+        path.push_back(p[path.back()]);
+
+    for (auto it = path.rbegin(); it != path.rend(); it++)
+        cout << *it << ' ';
+    cout << '\n';
 
     return (0 ^ 0);
 }
